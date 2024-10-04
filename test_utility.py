@@ -36,6 +36,17 @@ def feature_target_sample(housing_data_sample):
     return (feature_df, target_series)
 
 def test_data_split(feature_target_sample):
+    # Call the data_split function with prepared feature and target data
     return_tuple = data_split(*feature_target_sample)
-    # TODO test if the length of return_tuple is 4
-    raise NotImplemented
+    
+    # Test if the length of the return tuple is 4
+    assert len(return_tuple) == 4, "Expected 4 elements in the tuple (X_train, X_test, y_train, y_test)"
+
+    # Optionally, verify the shape or length of the split data
+    X_train, X_test, y_train, y_test = return_tuple
+
+    # Check if the number of rows in X_train + X_test equals the original number of rows
+    assert X_train.shape[0] + X_test.shape[0] == feature_target_sample[0].shape[0], "Training and test features size mismatch"
+
+    # Check if the number of rows in y_train + y_test equals the original number of rows
+    assert len(y_train) + len(y_test) == len(feature_target_sample[1]), "Training and test target size mismatch"
