@@ -2,6 +2,12 @@ pipeline {
     agent any
 
     stages {
+        stage('Check User') {
+            steps {
+                sh 'whoami'
+            }
+        }
+
         stage('Build') {
             steps {
                 sh '''#!/bin/bash
