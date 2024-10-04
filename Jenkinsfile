@@ -16,14 +16,17 @@ pipeline {
                 sh '''#!/bin/bash
                 echo 'Test Step: Running pytest with conda environment'
 
-                # Initialize Conda using sudo
-                sudo source ~/miniconda3/etc/profile.d/conda.sh
+                # Add Conda to the PATH
+                export PATH="/home/harshitn/miniconda3/condabin:$PATH"
 
-                # Activate the Conda environment using sudo
-                sudo conda activate mlip
+                # Initialize Conda
+                source /home/harshitn/miniconda3/etc/profile.d/conda.sh
 
-                # Run pytest using sudo
-                sudo pytest --maxfail=1 --disable-warnings
+                # Activate the Conda environment
+                conda activate mlip
+
+                # Run pytest
+                pytest --maxfail=1 --disable-warnings
 
                 echo 'pytest completed successfully'
                 '''
